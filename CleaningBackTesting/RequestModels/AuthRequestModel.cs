@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace CleaningBackTesting.RequestModels
 {
-    internal class AuthRequestModel
+    public static class AuthRequestModel
     {
+        public static int AYE(int x, int y)
+        {
+            return x + y;
+        }
     }
 }
