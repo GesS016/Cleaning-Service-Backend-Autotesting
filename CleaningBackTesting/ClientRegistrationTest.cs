@@ -1,4 +1,5 @@
 using System;
+using CleaningBackTesting.Client;
 using CleaningBackTesting.RequestModels;
 using NUnit.Framework;
 
@@ -16,5 +17,7 @@ namespace CleaningBackTesting
             Email = "lukesky@example.com",
             Phone = "string"
         };
+        SuperClient client = new SuperClient();
+        string id = client.ClientRegistration(ClientRegistrationRequestModel);
     }
 }
