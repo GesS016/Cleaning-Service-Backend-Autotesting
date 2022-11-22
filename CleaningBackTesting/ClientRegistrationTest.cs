@@ -6,6 +6,10 @@ using NUnit.Framework;
 namespace CleaningBackTesting
 {
     public class ClientRegistrationTest
+{
+
+        [Test]
+    public void Test1()
     {
         ClientRegistrationRequestModel clientRegistrationRequestModel = new ClientRegistrationRequestModel()
         {
@@ -18,6 +22,6 @@ namespace CleaningBackTesting
             Phone = "string"
         };
         SuperClient client = new SuperClient();
-        string id = client.ClientRegistration(ClientRegistrationRequestModel);
+        string id = client.ClientRegistration(clientRegistrationRequestModel);
     }
 }
