@@ -14,25 +14,27 @@ namespace CleaningBackTesting.Client
     {
         public string ClientRegistration(ClientRegistrationRequestModel clientRegistrationRequestModel)
         {
-            HttpStatusCode expectedCode = HttpStatusCode.Created;
+            HttpStatusCode expectedCode = HttpStatusCode.Created; //ожидаемый код=201
             string json = JsonSerializer.Serialize<ClientRegistrationRequestModel>(clientRegistrationRequestModel);
+            //переводит наш файл ClientRegistrationRequestModel в json формат
 
             HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }; //for security certificate
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }; 
+            //for security certificate
 
             HttpClient client = new HttpClient(clientHandler);
             HttpRequestMessage message = new HttpRequestMessage()
             {
-                Method = HttpMethod.Post,
-                RequestUri = new System.Uri($"https://piter-education.ru:10042/Clients"),
+                Method = HttpMethod.Post, //Эндпоинт, в котором мы сейчас работаем(POST)
+                RequestUri = new System.Uri($"https://piter-education.ru:10042/Clients"),//RequestURL из Swagger 
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
-            HttpResponseMessage responseMessage = client.Send(message);
+            HttpResponseMessage responseMessage = client.Send(message);//response с сайта в формате месседжа
 
-            HttpStatusCode actualCode = responseMessage.StatusCode;
-            Assert.AreEqual(expectedCode, actualCode);
+            HttpStatusCode actualCode = responseMessage.StatusCode;//actual код=код,выданный сайтом
+            Assert.AreEqual(expectedCode, actualCode);//сравнение ожидаемого и actual кода
 
-            string id = responseMessage.Content.ReadAsStringAsync().Result;
+            string id = responseMessage.Content.ReadAsStringAsync().Result;//перевеодит айди в стрингу
 
             return id;
         }
