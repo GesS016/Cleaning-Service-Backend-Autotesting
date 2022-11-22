@@ -1,16 +1,16 @@
+using System;
+using NUnit.Framework;
+
 namespace CleaningBackTesting
 {
     public class Tests
     {
-        [SetUp]
-        public void Setup()
+        FirstClassTest first  = new FirstClassTest();
+        [TestCase (2, 2, 4)]
+        public void ayeTest(int x,int y,int expected)
         {
-        }
-
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
+            int actual = first.aye(x,y);
+            Assert.AreEqual(expected, actual);
         }
     }
 }
