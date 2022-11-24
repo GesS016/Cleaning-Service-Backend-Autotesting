@@ -1,3 +1,4 @@
+using CleaningBackTesting.Client;
 using CleaningBackTesting.RequestModels;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,9 @@ namespace TestProjectCleaning
                 Email = "Admin@gmail.com"
             };
             Client client = new Client();
+
+            string token = client.Auth(adminAuthRequestModel);
+            
         }
     }
 }
