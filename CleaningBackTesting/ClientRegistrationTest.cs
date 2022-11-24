@@ -22,7 +22,7 @@ namespace CleaningBackTesting
                 Phone = "string"
             };
             ClientClient client = new ClientClient();
-            string id = client.ClientRegistration(clientRegistrationRequestModel);
+            int id = Convert.ToInt32(client.ClientRegistration(clientRegistrationRequestModel));
             //Assert.AreEqual(clientRegistrationRequestModel.Equals(clientRegistrationRequestModel), true);
         }
     }
