@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CleaningBackTesting.Client
 {
-    public class ClientClient
+    public class Client
     {
         public int ClientRegistration(ClientRegistrationRequestModel clientRegistrationRequestModel)
         {
