@@ -1,4 +1,5 @@
 using System;
+using CleaningBackTesting.Client;
 using CleaningBackTesting.RequestModels;
 using NUnit.Framework;
 
@@ -6,15 +7,23 @@ namespace CleaningBackTesting
 {
     public class ClientRegistrationTest
     {
-        ClientRegistrationRequestModel clientRegistrationRequestModel = new ClientRegistrationRequestModel()
+
+        [Test]
+        public void Test1()
         {
-            FirstName = "Ilham",
-            LastName = "Asadov",
-            BirthDate = "1971-03-14T10:47:35.733Z",
-            Password = "stringst",
-            ConfirmPassword = "stringst",
-            Email = "user@example.com",
-            Phone = "string"
-        };
+            ClientRegistrationRequestModel clientRegistrationRequestModel = new ClientRegistrationRequestModel()
+            {
+                FirstName = "Luke",
+                LastName = "Skywalker",
+                BirthDate = "1971-03-14T10:47:35.733Z",  //id 406
+                Password = "stringst",
+                ConfirmPassword = "stringst",
+                Email = "lukesky@example.com",
+                Phone = "string"
+            };
+            ClientClient client = new ClientClient();
+            string id = client.ClientRegistration(clientRegistrationRequestModel);
+            //Assert.AreEqual(clientRegistrationRequestModel.Equals(clientRegistrationRequestModel), true);
+        }
     }
 }
