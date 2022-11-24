@@ -17,7 +17,7 @@ namespace TestProjectCleaning
             };
             Client client = new Client();
 
-            string token = client.Auth(adminAuthRequestModel);
+            /*string token = client.Auth(adminAuthRequestModel);*/
             
         }
     }
