@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace CleaningBackTesting.Client
 {
-    public class SuperClient
+    public class ClientClient
     {
-        public string ClientRegistration(ClientRegistrationRequestModel clientRegistrationRequestModel)
+        public int ClientRegistration(ClientRegistrationRequestModel clientRegistrationRequestModel)
         {
             HttpStatusCode expectedCode = HttpStatusCode.Created; //ожидаемый код=201
             string json = JsonSerializer.Serialize<ClientRegistrationRequestModel>(clientRegistrationRequestModel);
@@ -34,7 +34,7 @@ namespace CleaningBackTesting.Client
             HttpStatusCode actualCode = responseMessage.StatusCode;//actual код=код,выданный сайтом
             Assert.AreEqual(expectedCode, actualCode);//сравнение ожидаемого и actual кода
 
-            string id = responseMessage.Content.ReadAsStringAsync().Result;//перевеодит айди в стрингу
+            int id =Convert.ToInt32( responseMessage.Content.ReadAsStringAsync().Result);//перевеодит айди в int
 
             return id;
         }

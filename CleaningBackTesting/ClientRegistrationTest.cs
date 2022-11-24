@@ -21,7 +21,7 @@ namespace CleaningBackTesting
                 Email = "lukesky@example.com",
                 Phone = "string"
             };
-            SuperClient client = new SuperClient();
+            ClientClient client = new ClientClient();
             string id = client.ClientRegistration(clientRegistrationRequestModel);
             //Assert.AreEqual(clientRegistrationRequestModel.Equals(clientRegistrationRequestModel), true);
         }
