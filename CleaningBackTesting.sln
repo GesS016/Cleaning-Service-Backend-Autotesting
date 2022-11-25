@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningBackTesting", "CleaningBackTesting\CleaningBackTesting.csproj", "{A355DE7C-2572-4374-B856-E269FB4678F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningBackTesting", "CleaningBackTesting\CleaningBackTesting.csproj", "{A355DE7C-2572-4374-B856-E269FB4678F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectCleaning", "TestProjectCleaning\TestProjectCleaning.csproj", "{8B2A9C0F-4B8F-44D4-B047-C09B062E6499}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A355DE7C-2572-4374-B856-E269FB4678F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A355DE7C-2572-4374-B856-E269FB4678F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A355DE7C-2572-4374-B856-E269FB4678F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B2A9C0F-4B8F-44D4-B047-C09B062E6499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B2A9C0F-4B8F-44D4-B047-C09B062E6499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B2A9C0F-4B8F-44D4-B047-C09B062E6499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B2A9C0F-4B8F-44D4-B047-C09B062E6499}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
