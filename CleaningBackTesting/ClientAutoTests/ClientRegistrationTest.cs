@@ -21,17 +21,13 @@ namespace CleaningBackTesting.TestsClient
                 Email = "lukesky@example.com",
                 Phone = "string"
             };
-<<<<<<< HEAD:CleaningBackTesting/ClientRegistrationTest.cs
-            Client.Client client = new Client.Client();
-<<<<<<< HEAD:CleaningBackTesting/ClientRegistrationTest.cs
-            //string id = client.ClientRegistration(clientRegistrationRequestModel);
-=======
-            string id = client.ClientRegistration(clientRegistrationRequestModel);
-=======
-            ClientClient client = new ClientClient();
+            Client.ClientClient client = new Client.ClientClient();
+
+            //string id = ClientClient.ClientRegistration(clientRegistrationRequestModel);
+
+            ClientClient clientClient = new ClientClient();
             int id = Convert.ToInt32(client.ClientRegistration(clientRegistrationRequestModel));
->>>>>>> CreatingСlient:CleaningBackTesting/ClientAutoTests/ClientRegistrationTest.cs
->>>>>>> ClientChange:CleaningBackTesting/ClientAutoTests/ClientRegistrationTest.cs
+            //CreatingСlient:CleaningBackTesting/ClientAutoTests/ClientRegistrationTest.cs
             //Assert.AreEqual(clientRegistrationRequestModel.Equals(clientRegistrationRequestModel), true);
         }
     }

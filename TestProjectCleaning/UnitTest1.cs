@@ -15,7 +15,7 @@ namespace TestProjectCleaning
                 Password = "qwerty12345",
                 Email = "Admin@gmail.com"
             };
-            Client client = new Client();
+            ClientClient client = new ClientClient();
 
             /*string token = client.Auth(adminAuthRequestModel);*/
             
