@@ -22,13 +22,9 @@ namespace CleaningBackTesting.TestsClient
                 Phone = "string"
             };
             Client.ClientClient client = new Client.ClientClient();
-
-            //string id = ClientClient.ClientRegistration(clientRegistrationRequestModel);
-
             ClientClient clientClient = new ClientClient();
             int id = Convert.ToInt32(client.ClientRegistration(clientRegistrationRequestModel));
-            //CreatingСlient:CleaningBackTesting/ClientAutoTests/ClientRegistrationTest.cs
-            //Assert.AreEqual(clientRegistrationRequestModel.Equals(clientRegistrationRequestModel), true);
+            Assert.IsTrue(id > 0);
         }
     }
 }
