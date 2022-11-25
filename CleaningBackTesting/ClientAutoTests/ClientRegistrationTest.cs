@@ -3,7 +3,7 @@ using CleaningBackTesting.Client;
 using CleaningBackTesting.RequestModels;
 using NUnit.Framework;
 
-namespace CleaningBackTesting
+namespace CleaningBackTesting.TestsClient
 {
     public class ClientRegistrationTest
     {
