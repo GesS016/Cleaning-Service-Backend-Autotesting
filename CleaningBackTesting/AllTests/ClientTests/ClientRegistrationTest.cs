@@ -3,7 +3,7 @@ using CleaningBackTesting.Client;
 using CleaningBackTesting.RequestModels;
 using NUnit.Framework;
 
-namespace CleaningBackTesting
+namespace CleaningBackTesting.TestsClient
 {
     public class ClientRegistrationTest
     {
@@ -21,9 +21,10 @@ namespace CleaningBackTesting
                 Email = "lukesky@example.com",
                 Phone = "string"
             };
-            ClientClient client = new ClientClient();
-            string id = client.ClientRegistration(clientRegistrationRequestModel);
-            //Assert.AreEqual(clientRegistrationRequestModel.Equals(clientRegistrationRequestModel), true);
+            Client.ClientClient client = new Client.ClientClient();
+            ClientClient clientClient = new ClientClient();
+            int id = Convert.ToInt32(client.ClientRegistration(clientRegistrationRequestModel));
+            Assert.IsTrue(id > 0);
         }
     }
 }
