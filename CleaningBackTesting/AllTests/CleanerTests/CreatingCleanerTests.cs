@@ -6,11 +6,11 @@ using NUnit.Framework;
 
 namespace CleaningBackTesting.CleanerTests
 {
-    public class CreatingCleanerTest
+    public class CreatingCleanerTests
     {
 
         [Test]
-        public void Test1()
+        public void CreateCleanerTest()
         {
             CleanerRegistrationRequestModel cleanerRegistrationRequestModel = new CleanerRegistrationRequestModel()
             {
@@ -19,12 +19,12 @@ namespace CleaningBackTesting.CleanerTests
                 BirthDate = "1971-03-14T10:47:35.733Z",  //id 406
                 Password = "stringst",
                 ConfirmPassword = "stringst",
-                Email = "lukesky@example.com",
+                Email = "luke111sky@example.com",
                 Phone = "string",
                 Passport = "stringstri",
                 Schedule = 1,
-                ServicesIds = { 0 }, //Maks pomogi
-                Districts = { 1 }
+                ServicesIds = new List<int>() { }, 
+                Districts = new List<int>() { }
             };
 
             Client.CleanerClient cleanerclient = new Client.CleanerClient();

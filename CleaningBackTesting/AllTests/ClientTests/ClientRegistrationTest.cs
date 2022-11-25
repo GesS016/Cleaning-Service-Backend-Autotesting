@@ -18,12 +18,11 @@ namespace CleaningBackTesting.TestsClient
                 BirthDate = "1971-03-14T10:47:35.733Z",  //id 406
                 Password = "stringst",
                 ConfirmPassword = "stringst",
-                Email = "lukesky@example.com",
+                Email = "luke9999sky@example.com",
                 Phone = "string"
             };
-            Client.ClientClient client = new Client.ClientClient();
-            ClientClient clientClient = new ClientClient();
-            int id = Convert.ToInt32(client.ClientRegistration(clientRegistrationRequestModel));
+            ClientClient client = new ClientClient();
+            int id = client.ClientRegistration(clientRegistrationRequestModel);
             Assert.IsTrue(id > 0);
         }
     }
