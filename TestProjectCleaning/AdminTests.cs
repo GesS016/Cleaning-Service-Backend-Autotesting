@@ -8,17 +8,18 @@ namespace TestProjectCleaning
 {
     public class Tests
     {
-        public void Test1()
+        [Test]
+        public void AdminAuthTest()
         {
             AdminAuthRequestModel adminAuthRequestModel = new AdminAuthRequestModel()
             {
                 Password = "qwerty12345",
                 Email = "Admin@gmail.com"
             };
-            ClientClient client = new ClientClient();
+            AdminClient client = new AdminClient();
 
-            /*string token = client.Auth(adminAuthRequestModel);*/
-            
+            string token = client.Auth(adminAuthRequestModel);
+            Assert.NotNull(token);
         }
     }
 }
