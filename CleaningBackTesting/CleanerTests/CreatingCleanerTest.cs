@@ -26,9 +26,11 @@ namespace CleaningBackTesting.CleanerTests
                 ServicesIds = { 0 }, //Maks pomogi
                 Districts = { 1 }
             };
+
             Client.CleanerClient cleanerclient = new Client.CleanerClient();
-            //string id = cleanerclient.CleanerRegistration(CleanerRegistrationRequestModel);
-            //Assert.AreEqual(clientRegistrationRequestModel.Equals(clientRegistrationRequestModel), true);
+
+            int id = Convert.ToInt32(cleanerclient.CleanerRegistration(cleanerRegistrationRequestModel));
+            Assert.IsTrue(id > 0); //override sozdat nujno mb
         }
     }
 }
