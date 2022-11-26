@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace CleaningBackTesting.Client
 {
-    public class AdminAuth
+    public class AdminClient
     {
         public string Auth(AdminAuthRequestModel adminAuthRequestModel)
         {

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace TestProjectCleaning
+namespace CleaningBackTesting
 {
     public class Tests
     {
