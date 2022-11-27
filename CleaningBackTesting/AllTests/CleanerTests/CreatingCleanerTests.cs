@@ -1,5 +1,6 @@
 ﻿using System;
 using CleaningBackTesting.Client;
+using CleaningBackTesting.Models.ResponseModels;
 using CleaningBackTesting.RequestModels;
 using NUnit.Framework;
 
@@ -23,14 +24,28 @@ namespace CleaningBackTesting.CleanerTests
                 Phone = "string",
                 Passport = "stringstri",
                 Schedule = 1,
-                ServicesIds = new List<int>() { }, 
+                ServicesIds = new List<int>() { },
                 Districts = new List<int>() { }
             };
+
 
             Client.CleanerClient cleanerclient = new Client.CleanerClient();
 
             int id = Convert.ToInt32(cleanerclient.CleanerRegistration(cleanerRegistrationRequestModel));
-            Assert.IsTrue(id > 0); //override sozdat nujno mb
+            Assert.IsTrue(id > 0);
+
+            AuthRequestModel authInputModel = new AuthRequestModel()
+            {
+                Password = "qwerty12345",
+                Email = "Admin@gmail.com"
+            };
+            CleanerClient client = new CleanerClient();
+
+            string token = client.Auth(authInputModel);
+
+            List<CleanerListResponseModel> cleaners = client.GetCleaners(token);
+
+            CollectionAssert.Contains(cleaners, cleanerRegistrationRequestModel);
         }
     }
 }
