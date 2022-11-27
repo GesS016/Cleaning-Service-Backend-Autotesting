@@ -3,11 +3,11 @@ using CleaningBackTesting.RequestModels;
 
 namespace CleaningBackTesting.TestsClient
 {
-    public class ClientRegistrationTest
+    public class ClientTests
     {
 
         [Test]
-        public void Test1()
+        public void ClientRegistrationTest()
         {
             ClientRegistrationRequestModel clientRegistrationRequestModel = new ClientRegistrationRequestModel()
             {

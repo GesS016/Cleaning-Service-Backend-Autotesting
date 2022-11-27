@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CleaningBackTesting
 {
-    public class Tests
+    public class AdminTests
     {
         [Test]
         public void AdminAuthTest()

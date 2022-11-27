@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace CleaningBackTesting.CleanerTests
 {
-    public class CreatingCleanerTests
+    public class CleanerTests
     {
 
         [Test]
