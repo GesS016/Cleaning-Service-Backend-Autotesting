@@ -11,7 +11,7 @@ namespace CleaningBackTesting
         [Test]
         public void AdminAuthTest()
         {
-            AdminAuthRequestModel adminAuthRequestModel = new AdminAuthRequestModel()
+            AuthRequestModel adminAuthRequestModel = new AuthRequestModel()
             {
                 Password = "qwerty12345",
                 Email = "Admin@gmail.com"

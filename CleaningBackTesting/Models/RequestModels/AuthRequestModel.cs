@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CleaningBackTesting.RequestModels
 {
-    public class AdminAuthRequestModel
+    public class AuthRequestModel
     {
         [JsonPropertyName("password")]
         public string Password { get; set; }

@@ -12,10 +12,10 @@ namespace CleaningBackTesting.Client
 {
     public class AdminClient
     {
-        public string Auth(AdminAuthRequestModel adminAuthRequestModel)
+        public string Auth(AuthRequestModel adminAuthRequestModel)
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
-            string json = JsonSerializer.Serialize<AdminAuthRequestModel>(adminAuthRequestModel);
+            string json = JsonSerializer.Serialize<AuthRequestModel>(adminAuthRequestModel);
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient client = new HttpClient(clientHandler);
