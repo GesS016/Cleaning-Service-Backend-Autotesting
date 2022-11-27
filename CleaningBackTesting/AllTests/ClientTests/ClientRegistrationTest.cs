@@ -1,7 +1,5 @@
-using System;
-using CleaningBackTesting.Client;
+
 using CleaningBackTesting.RequestModels;
-using NUnit.Framework;
 
 namespace CleaningBackTesting.TestsClient
 {
@@ -21,9 +19,14 @@ namespace CleaningBackTesting.TestsClient
                 Email = "luke9999sky@example.com",
                 Phone = "string"
             };
-            ClientClient client = new ClientClient();
-            int id = client.ClientRegistration(clientRegistrationRequestModel);
-            Assert.IsTrue(id > 0);
+            AuthRequestModel clientAuthRequestModel = new AuthRequestModel()
+            {
+                Password="stringst",
+                Email= "luke9999sky@example.com"
+            };
+            Client.ClientClient client = new Client.ClientClient();
+            string token = client.Auth(clientAuthRequestModel);
+            Assert.NotNull(token);
         }
     }
 }
