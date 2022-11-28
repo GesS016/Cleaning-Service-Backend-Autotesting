@@ -38,6 +38,11 @@ namespace CleaningBackTesting.TestsClient
             string connectionString = @"Data Source = 80.78.240.16; Initial Catalog = YogurtCleaning.DB; Persist Security Info = True; User ID = student; Password = qwe!23;";
             IDbConnection dbConnection = new SqlConnection(connectionString);
             dbConnection.Open();
+            dbConnection.Query("Delete Comment");
+            dbConnection.Query("Delete BundleOrder");
+            dbConnection.Query("Delete CleanerOrder");
+            dbConnection.Query("Delete [Order]");
+            dbConnection.Query("Delete CleaningObject");
             dbConnection.Query("Delete Client");
             dbConnection.Close();
         }
