@@ -1,4 +1,5 @@
-﻿using CleaningBackTesting.RequestModels;
+﻿using CleaningBackTesting.Models.RequestModels;
+using CleaningBackTesting.RequestModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +62,29 @@ namespace CleaningBackTesting.Client
             return token;
         }
 
+        public int CreateOrder(BundlesRequestModel ordersRequestModel)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.Created; 
+            string json = JsonSerializer.Serialize<BundlesRequestModel>(ordersRequestModel);
+           
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            
+            HttpClient client = new HttpClient(clientHandler);
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post, 
+                RequestUri = new System.Uri($"https://piter-education.ru:10042/Orders"),
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+            HttpResponseMessage responseMessage = client.Send(message);
 
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+            Assert.AreEqual(expectedCode, actualCode);
 
+            int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
+
+            return id;
+        }
     }
 }

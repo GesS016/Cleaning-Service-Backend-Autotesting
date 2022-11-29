@@ -16,7 +16,7 @@ namespace CleaningBackTesting.Models.RequestModels
         public int CleaningObjectId { get; set; }
 
         [JsonPropertyName("startTime")]
-        public DateTime StartTime { get; set; }
+        public string StartTime { get; set; }
 
         [JsonPropertyName("bundlesIds")]
         public List<int> BundlesIds { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleaningBackTesting.Models.RequestModels
 {
-    public class BundlesRequestMoidel
+    public class BundlesRequestModel
     { 
         [JsonPropertyName("name")]
         public string Name { get; set; }
