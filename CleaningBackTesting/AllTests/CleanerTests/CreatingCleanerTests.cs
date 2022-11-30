@@ -55,7 +55,7 @@ namespace CleaningBackTesting.CleanerTests
 
             List<CleanerListResponseModel> cleaners = cleaner.GetCleaners(token);
 
-            CollectionAssert.Contains(cleaners, new CleanerListResponseModel());
+            CollectionAssert.Contains(cleaners, cleaner);
         }
 
         [TearDown]
@@ -63,8 +63,10 @@ namespace CleaningBackTesting.CleanerTests
         {
             using (IDbConnection dbConnection = new SqlConnection(@"Data Source = 80.78.240.16; Initial Catalog = YogurtCleaning.DB; Persist Security Info = True; User ID = student; Password = qwe!23;"))
             {
-                dbConnection.Query($"Delete from CleanerDistrict where CleanersId={_id}");
-                dbConnection.Query($"Delete from Cleaner where Email='{EMAIL}'");
+                dbConnection.Query($"Delete from CleanerOrder");
+                dbConnection.Query($"Delete from CleanerService");
+                dbConnection.Query($"Delete from CleanerDistrict");
+                dbConnection.Query($"Delete from Cleaner");
             }
         }
     }

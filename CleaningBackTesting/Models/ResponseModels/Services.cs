@@ -25,6 +25,6 @@ namespace CleaningBackTesting.Models.ResponseModels
         public string Unit { get; set; }
 
         [JsonPropertyName("duration")]
-        public int Duration { get; set; }
+        public double Duration { get; set; }
     }
 }

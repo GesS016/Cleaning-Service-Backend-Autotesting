@@ -35,5 +35,10 @@ namespace CleaningBackTesting.Models.ResponseModels
 
         [JsonPropertyName("services")]
         public List<Services> Services { get; set; }
+
+        public override string ToString()
+        {
+            return FirstName;
+        }
     }
 }
