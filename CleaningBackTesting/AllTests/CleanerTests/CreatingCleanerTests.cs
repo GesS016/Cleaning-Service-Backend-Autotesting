@@ -55,7 +55,7 @@ namespace CleaningBackTesting.CleanerTests
 
             List<CleanerListResponseModel> cleaners = cleaner.GetCleaners(token);
 
-            CollectionAssert.Contains(cleaners, cleaner);
+            CollectionAssert.Contains(cleaners, new CleanerListResponseModel());
         }
 
         [TearDown]
