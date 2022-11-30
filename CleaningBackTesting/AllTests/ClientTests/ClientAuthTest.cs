@@ -20,7 +20,7 @@ namespace CleaningBackTesting.TestsClient
             {
                 FirstName = "Luke",
                 LastName = "Skywalker",
-                BirthDate = "1971-03-14T10:47:35.733Z",  //id 406
+                BirthDate = "1971-03-14T10:47:35.733Z",  
                 Password = PASSWORD,
                 ConfirmPassword = PASSWORD,
                 Email = EMAIL,
