@@ -12,8 +12,14 @@ namespace CleaningBackTesting
 {
     public class CreateOrderTest
     {
+        private int _serviceId;
+        private int _cleaningObjectId;
+        private int _bundlesId;
+        private int _orderId;
         private const string EMAIL = "luke11123sky@example.com";
         private const string PASSWORD = "stringst";
+        private const string CONNECTIONSTRING = @"Data Source = 80.78.240.16; Initial Catalog = YogurtCleaning.DB; Persist Security Info = True; User ID = student; Password = qwe!23;";
+
         [Test]
         public void CreateOrderTest1()
         {
@@ -36,7 +42,7 @@ namespace CleaningBackTesting
                 Email = "Admin@gmail.com"
             });
 
-            int serviceId = admin.CreateService(new ServiceRequestModel()
+            _serviceId = admin.CreateService(new ServiceRequestModel()
             {
                 Name = "string",
                 RoomType = 1,
@@ -45,14 +51,14 @@ namespace CleaningBackTesting
                 Duration = 0
             },token);
 
-            int bundlesId = admin.CreateBundles(new BundlesRequestModel()
+            _bundlesId = admin.CreateBundles(new BundlesRequestModel()
             {
                 Name = "string",
                 Type = 1,
                 RoomType = 1,
                 Price = 500,
                 Measure = 1,
-                ServicesIds = new List<int>() {serviceId},
+                ServicesIds = new List<int>() {_serviceId},
             }, token);
 
             string clientToken = client.Auth(new AuthRequestModel()
@@ -61,7 +67,7 @@ namespace CleaningBackTesting
                 Email = EMAIL
             });
 
-            int cleaninObjectId=client.CreateCleaningObject(new CleaningObjectRequestModel()
+            _cleaningObjectId=client.CreateCleaningObject(new CleaningObjectRequestModel()
             {
                 NumberOfRooms = 1,
                 NumberOfBalconies = 1,
@@ -73,16 +79,29 @@ namespace CleaningBackTesting
                 ClientId = 1
             },clientToken);
 
-            int orderId = client.CreateOrder(new OrdersRequestModel()
+            _orderId = client.CreateOrder(new OrdersRequestModel()
             {
                 ClientId = clientId,
-                CleaningObjectId = cleaninObjectId,
+                CleaningObjectId = _cleaningObjectId,
                 StartTime = "2022-12-01T22:50:58.106Z",
-                BundlesIds = new List<int>() { bundlesId },
-                ServicesIds = new List<int>() { serviceId },
+                BundlesIds = new List<int>() {_bundlesId},
+                ServicesIds = new List<int>() {_serviceId},
             }, clientToken);
 
-            Assert.NotNull(orderId);
+            Assert.NotNull(_orderId);
+        }
+
+        [TearDown]
+        public void Delete()
+        {
+            using (IDbConnection dbConnection = new SqlConnection(CONNECTIONSTRING))
+            {
+                dbConnection.Query($"Delete from Client where Email='{EMAIL}'");
+                dbConnection.Query($"Delete from Service where Id='{_serviceId}'"); 
+                dbConnection.Query($"Delete from Bundle where Id='{_bundlesId}'");
+                dbConnection.Query($"Delete from CleaningObject where Id='{_cleaningObjectId}'");
+                dbConnection.Query($"Delete from Order where Id='{_orderId}'");
+            }
         }
     }
 }
