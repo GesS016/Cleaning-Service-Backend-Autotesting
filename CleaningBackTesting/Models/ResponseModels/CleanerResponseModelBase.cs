@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Text.Json.Serialization;
 
 namespace CleaningBackTesting.Models.ResponseModels
 {
-    public class CleanerListResponseModel
+    public class CleanerResponseModelBase
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
@@ -35,20 +27,5 @@ namespace CleaningBackTesting.Models.ResponseModels
 
         [JsonPropertyName("rating")]
         public double Rating { get; set; }
-
-       public override bool Equals(object? obj)
-        {
-            return obj is CleanerListResponseModel model &&
-                FirstName == model.FirstName &&
-                LastName == model.LastName &&
-                Phone == model.Phone &&
-                Email == model.Email &&
-                Rating == model.Rating;
-        }
-
-        public override string ToString()
-        {
-            return FirstName;
-        }
     }
 }
