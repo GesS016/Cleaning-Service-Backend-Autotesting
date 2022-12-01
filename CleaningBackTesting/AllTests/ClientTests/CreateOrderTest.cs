@@ -12,11 +12,13 @@ namespace CleaningBackTesting
 {
     public class CreateOrderTest
     {
+        private const string EMAIL = "luke11123sky@example.com";
+        private const string PASSWORD = "stringst";
         [Test]
         public void CreateOrderTest1()
         {
             Client.ClientClient client = new();
-            client.ClientRegistration(new ClientRegistrationRequestModel()
+            int clientId=client.ClientRegistration(new ClientRegistrationRequestModel()
             {
                 FirstName = "Luke",
                 LastName = "Skywalker",
@@ -27,14 +29,39 @@ namespace CleaningBackTesting
                 Phone = "string"
             });
 
-            Client.AdminClient admin = new AdminClient();
-            AuthRequestModel adminAuthRequestModel = new AuthRequestModel()
+            Client.AdminClient admin = new();
+            string token=admin.Auth(new AuthRequestModel()
             {
                 Password = "qwerty12345",
                 Email = "Admin@gmail.com"
-            };
+            });
 
-            CleaningObjectRequestModel cleaningObjectRequestModel = new CleaningObjectRequestModel()
+            int serviceId = admin.CreateService(new ServiceRequestModel()
+            {
+                Name = "string",
+                RoomType = 1,
+                Price = 50,
+                Unit = "string",
+                Duration = 0
+            },token);
+
+            int bundlesId = admin.CreateBundles(new BundlesRequestModel()
+            {
+                Name = "string",
+                Type = 1,
+                RoomType = 1,
+                Price = 500,
+                Measure = 1,
+                ServicesIds = new List<int>() {serviceId},
+            }, token);
+
+            string clientToken = client.Auth(new AuthRequestModel()
+            {
+                Password = PASSWORD,
+                Email = EMAIL
+            });
+
+            int cleaninObjectId=client.CreateCleaningObject(new CleaningObjectRequestModel()
             {
                 NumberOfRooms = 1,
                 NumberOfBalconies = 1,
@@ -44,42 +71,18 @@ namespace CleaningBackTesting
                 Address = "Aliyar Aliyev",
                 District = 1,
                 ClientId = 1
-            };
-        }
-        private const string EMAIL = "lukesky111@example.com";
-        private const string PASSWORD = "stringst";
-        private const string CONNECTIONSTRING = @"Data Source = 80.78.240.16; Initial Catalog = YogurtCleaning.DB; Persist Security Info = True; User ID = student; Password = qwe!23;";
+            },clientToken);
 
-        [Test]
-        public void ClientAuthTest()
-        {
-            Client.ClientClient client = new();
-            client.ClientRegistration(new ClientRegistrationRequestModel()
+            int orderId = client.CreateOrder(new OrdersRequestModel()
             {
-                FirstName = "Luke",
-                LastName = "Skywalker",
-                BirthDate = "1971-03-14T10:47:35.733Z",  //id 406
-                Password = PASSWORD,
-                ConfirmPassword = PASSWORD,
-                Email = EMAIL,
-                Phone = "string"
-            });
+                ClientId = clientId,
+                CleaningObjectId = cleaninObjectId,
+                StartTime = "2022-12-01T22:50:58.106Z",
+                BundlesIds = new List<int>() { bundlesId },
+                ServicesIds = new List<int>() { serviceId },
+            }, clientToken);
 
-            string token = client.Auth(new AuthRequestModel()
-            {
-                Password = PASSWORD,
-                Email = EMAIL
-            });
-            Assert.NotNull(token);
-        }
-
-        [TearDown]
-        public void ClientDelete()
-        {
-            using (IDbConnection dbConnection = new SqlConnection(CONNECTIONSTRING))
-            {
-                dbConnection.Query($"Delete from Client where Email='{EMAIL}'");
-            }
+            Assert.NotNull(orderId);
         }
     }
 }
