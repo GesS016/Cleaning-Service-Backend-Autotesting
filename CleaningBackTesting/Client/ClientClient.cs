@@ -80,6 +80,21 @@ namespace CleaningBackTesting.Client
             return id;
         }
 
+        public int CreateCleaningObject(CleaningObjectRequestModel cleaningObjectRequestModel, string token)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.Created;
+            string json = JsonSerializer.Serialize<CleaningObjectRequestModel>(cleaningObjectRequestModel);
+
+            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST+"/cleaning-objects", token, json);
+
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+            Assert.AreEqual(expectedCode, actualCode);
+
+            int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
+
+            return id;
+        }
+
         private static HttpResponseMessage SendRequest(HttpMethod httpMethod, string uriString, string token = null, string jsonContent = null)
         {
             HttpClientHandler clientHandler = new HttpClientHandler();

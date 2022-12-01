@@ -12,12 +12,12 @@ namespace CleaningBackTesting.Client
         private const string HOST = "https://piter-education.ru:10042";
         private const string CLEANERSHOST = HOST + "/Cleaners";
 
-        public int CleanerRegistration(CleanerRegistrationRequestModel cleanerRegistrationRequestModel)
+        public int CleanerRegistration(CleanerRegistrationRequestModel cleanerRegistrationRequestModel, string token)
         {
             HttpStatusCode expectedCode = HttpStatusCode.Created;
             string json = JsonSerializer.Serialize<CleanerRegistrationRequestModel>(cleanerRegistrationRequestModel);
 
-            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, CLEANERSHOST, jsonContent: json);
+            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, CLEANERSHOST, token, json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
 
