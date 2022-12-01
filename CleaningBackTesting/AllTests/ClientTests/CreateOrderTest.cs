@@ -16,7 +16,7 @@ namespace CleaningBackTesting
         private int _cleaningObjectId;
         private int _bundlesId;
         private int _orderId;
-        private const string EMAIL = "luke11123sky@example.com";
+        private const string EMAIL = "luke111234sky@example.com";
         private const string PASSWORD = "stringst";
         private const string CONNECTIONSTRING = @"Data Source = 80.78.240.16; Initial Catalog = YogurtCleaning.DB; Persist Security Info = True; User ID = student; Password = qwe!23;";
 
@@ -96,11 +96,12 @@ namespace CleaningBackTesting
         {
             using (IDbConnection dbConnection = new SqlConnection(CONNECTIONSTRING))
             {
-                dbConnection.Query($"Delete from Client where Email='{EMAIL}'");
-                dbConnection.Query($"Delete from Service where Id='{_serviceId}'"); 
-                dbConnection.Query($"Delete from Bundle where Id='{_bundlesId}'");
-                dbConnection.Query($"Delete from CleaningObject where Id='{_cleaningObjectId}'");
-                dbConnection.Query($"Delete from Order where Id='{_orderId}'");
+                dbConnection.Query($"Delete from BundleService/* where Id='{_bundlesId}'*/");
+                dbConnection.Query($"Delete from Bundle/* where Id='{_bundlesId}'*/");
+                dbConnection.Query($"Delete from Service/* where Id='{_serviceId}'*/"); 
+                dbConnection.Query($"Delete from [Order]/* where Id='{_orderId}'*/");
+                dbConnection.Query($"Delete from CleaningObject/* where Id='{_cleaningObjectId}'*/");
+                dbConnection.Query($"Delete from Client/* where Email='{EMAIL}'*/");
             }
         }
     }
