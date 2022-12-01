@@ -89,17 +89,22 @@ namespace CleaningBackTesting.Client
             HttpStatusCode expectedCode = HttpStatusCode.Created;
             string json = JsonSerializer.Serialize<BundlesRequestModel>(bundlesRequestModel);
 
-            //HttpClientHandler clientHandler = new HttpClientHandler();
-            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
-            //HttpClient client = new HttpClient(clientHandler);
-            //HttpRequestMessage message = new HttpRequestMessage()
-            //{
-            //    Method = HttpMethod.Post,
-            //    RequestUri = new System.Uri($"https://piter-education.ru:10042/Bundles"),
-            //    Content = new StringContent(json, Encoding.UTF8, "application/json")
-            //};
             HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST+"/Bundles", token, json);
+
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+            Assert.AreEqual(expectedCode, actualCode);
+
+            int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
+
+            return id;
+        }
+
+        public int CreateService(ServiceRequestModel serviceRequestModel, string token)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.Created;
+            string json = JsonSerializer.Serialize<ServiceRequestModel>(serviceRequestModel);
+
+            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST + "/Services", token, json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
             Assert.AreEqual(expectedCode, actualCode);
