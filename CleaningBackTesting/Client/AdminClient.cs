@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using CleaningBackTesting.Models.RequestModels;
 using System.Net.Http.Headers;
+using CleaningBackTesting.Models.ResponseModels;
 
 namespace CleaningBackTesting.Client
 {
@@ -36,6 +37,22 @@ namespace CleaningBackTesting.Client
 
             return token;
         }
+
+        public int CleanerRegistration(CleanerRegistrationRequestModel cleanerRegistrationRequestModel, string token)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.Created;
+            string json = JsonSerializer.Serialize<CleanerRegistrationRequestModel>(cleanerRegistrationRequestModel);
+
+            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST+"/cleaners", token, json);
+
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            Assert.AreEqual(expectedCode, actualCode);
+
+            int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
+            return id;
+        }
+
         public int CreateCleaningObject(BundlesRequestModel creatingObjectRequestModel)
         {
             HttpStatusCode expectedCode = HttpStatusCode.Created;
@@ -112,6 +129,22 @@ namespace CleaningBackTesting.Client
             int id = Convert.ToInt32(responseMessage.Content.ReadAsStringAsync().Result);
 
             return id;
+        }
+
+        public GetCleanerResponseModel GetCleanerById(string token, int id)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.OK;
+
+            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Get, HOST + $"/cleaners/{id}", token);
+
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+
+            Assert.AreEqual(expectedCode, actualCode);
+
+            string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
+            GetCleanerResponseModel cleaner = JsonSerializer.Deserialize<GetCleanerResponseModel>(responseJson)!;
+
+            return cleaner;
         }
 
         private static HttpResponseMessage SendRequest(HttpMethod httpMethod, string uriString, string token = null, string jsonContent = null)

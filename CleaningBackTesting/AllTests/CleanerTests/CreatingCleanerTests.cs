@@ -15,8 +15,15 @@ namespace CleaningBackTesting.CleanerTests
         [Test]
         public void CreateCleanerTest()
         {
-            CleanerClient client = new();
-            id = client.CleanerRegistration(new CleanerRegistrationRequestModel()
+            AdminClient adminClient = new();
+            string token = adminClient.Auth(new AuthRequestModel()
+            {
+                Password = "qwerty12345",
+                Email = "Admin@gmail.com"
+            });
+
+
+            id = adminClient.CleanerRegistration(new CleanerRegistrationRequestModel()
             {
                 FirstName = "Luke",
                 LastName = "Skywalker",
@@ -29,16 +36,9 @@ namespace CleaningBackTesting.CleanerTests
                 Schedule = 1,
                 ServicesIds = new List<int>() { },
                 Districts = new List<int>() { }
-            });
+            }, token);
 
-            AdminClient adminClient = new();
-            string token = adminClient.Auth(new AuthRequestModel()
-            {
-                Password = "qwerty12345",
-                Email = "Admin@gmail.com"
-            });
-
-            GetCleanerResponseModel cleaner = client.GetCleanerById(token, id);
+            GetCleanerResponseModel cleaner = adminClient.GetCleanerById(token, id);
 
             Assert.IsNotNull(cleaner);
         }
