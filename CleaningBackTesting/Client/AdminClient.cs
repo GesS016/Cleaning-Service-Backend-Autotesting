@@ -14,6 +14,7 @@ namespace CleaningBackTesting.Client
 {
     public class AdminClient
     {
+        private const string HOST = "https://piter-education.ru:10042";
         public string Auth(AuthRequestModel adminAuthRequestModel)
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
@@ -83,22 +84,22 @@ namespace CleaningBackTesting.Client
 
             return id;
         }
-        public int CreateBundles(BundlesRequestModel bundlesRequestModel)
+        public int CreateBundles(BundlesRequestModel bundlesRequestModel, string token)
         {
             HttpStatusCode expectedCode = HttpStatusCode.Created;
             string json = JsonSerializer.Serialize<BundlesRequestModel>(bundlesRequestModel);
 
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
-            HttpClient client = new HttpClient(clientHandler);
-            HttpRequestMessage message = new HttpRequestMessage()
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new System.Uri($"https://piter-education.ru:10042/Bundles"),
-                Content = new StringContent(json, Encoding.UTF8, "application/json")
-            };
-            HttpResponseMessage responseMessage = client.Send(message);
+            //HttpClient client = new HttpClient(clientHandler);
+            //HttpRequestMessage message = new HttpRequestMessage()
+            //{
+            //    Method = HttpMethod.Post,
+            //    RequestUri = new System.Uri($"https://piter-education.ru:10042/Bundles"),
+            //    Content = new StringContent(json, Encoding.UTF8, "application/json")
+            //};
+            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST+"/Bundles", token, json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
             Assert.AreEqual(expectedCode, actualCode);
