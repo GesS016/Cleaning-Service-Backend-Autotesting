@@ -15,7 +15,7 @@ namespace CleaningBackTesting.Client
         public List<GetCleanerResponseModel> GetCleaners(string token)
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
-            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Get, CLEANERSHOST, token);
+            HttpResponseMessage responseMessage = MethodClients.SendRequest(HttpMethod.Get, CLEANERSHOST, token);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
 
@@ -25,31 +25,6 @@ namespace CleaningBackTesting.Client
             List<GetCleanerResponseModel> cleaners = JsonSerializer.Deserialize<List<GetCleanerResponseModel>>(responseJson)!;
 
             return cleaners;
-        }
-
-        private static HttpResponseMessage SendRequest(HttpMethod httpMethod, string uriString, string token = null, string jsonContent = null)
-        {
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
-            HttpClient client = new HttpClient(clientHandler);
-            if (!string.IsNullOrWhiteSpace(token))
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            }
-
-            HttpRequestMessage message = new HttpRequestMessage()
-            {
-                Method = httpMethod,
-                RequestUri = new System.Uri(uriString)
-            };
-            if (!string.IsNullOrWhiteSpace(jsonContent))
-            {
-                message.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            }
-
-            HttpResponseMessage responseMessage = client.Send(message);
-            return responseMessage;
         }
     }
 }
