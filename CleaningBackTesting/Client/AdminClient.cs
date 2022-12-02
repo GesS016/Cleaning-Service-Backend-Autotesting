@@ -5,6 +5,7 @@ using System.Text.Json;
 using CleaningBackTesting.Models.RequestModels;
 using System.Net.Http.Headers;
 using CleaningBackTesting.Models.ResponseModels;
+using CleaningBackTesting.Client;
 
 namespace CleaningBackTesting.Client
 {
@@ -16,7 +17,7 @@ namespace CleaningBackTesting.Client
             HttpStatusCode expectedCode = HttpStatusCode.OK;
             string json = JsonSerializer.Serialize<AuthRequestModel>(adminAuthRequestModel);
 
-            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST + "/auth", jsonContent : json);
+            HttpResponseMessage responseMessage = SendRequestForClients.SendRequest(HttpMethod.Post, HOST + "/auth", jsonContent : json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
             Assert.AreEqual(expectedCode, actualCode);
@@ -87,29 +88,6 @@ namespace CleaningBackTesting.Client
             return cleaner;
         }
 
-        private static HttpResponseMessage SendRequest(HttpMethod httpMethod, string uriString, string token = null, string jsonContent = null)
-        {
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
-            HttpClient client = new HttpClient(clientHandler);
-            if (!string.IsNullOrWhiteSpace(token))
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            }
-
-            HttpRequestMessage message = new HttpRequestMessage()
-            {
-                Method = httpMethod,
-                RequestUri = new System.Uri(uriString)
-            };
-            if (!string.IsNullOrWhiteSpace(jsonContent))
-            {
-                message.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            }
-
-            HttpResponseMessage responseMessage = client.Send(message);
-            return responseMessage;
-        }
+        
     }
 }
