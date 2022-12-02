@@ -1,13 +1,8 @@
-﻿using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
-using CleaningBackTesting.Client;
 using CleaningBackTesting.Models.ResponseModels;
 using CleaningBackTesting.RequestModels;
-using NUnit.Framework;
-using System.Runtime.CompilerServices;
 using Dapper;
-using NUnit.Framework.Constraints;
 
 namespace CleaningBackTesting.CleanerTests
 {
@@ -37,21 +32,13 @@ namespace CleaningBackTesting.CleanerTests
             _id=cleaner.CleanerRegistration(cleanerRegistration);
 
 
-            //Client.CleanerClient cleanerclient = new Client.CleanerClient();
-
-            //int id = Convert.ToInt32(cleanerclient.CleanerRegistration(cleanerRegistrationRequestModel));
-            //Assert.IsTrue(id > 0);
-
             Client.AdminClient adminClient = new();
             string token=adminClient.Auth(new AuthRequestModel()
             {
                 Password = "qwerty12345",
                 Email = "Admin@gmail.com"
             });
-            //CleanerClient client = new CleanerClient();
-
-            //string token = client.Auth(authInputModel);
-
+           
 
             List<CleanerListResponseModel> cleaners = cleaner.GetCleaners(token);
 
