@@ -1,11 +1,6 @@
 ﻿using CleaningBackTesting.RequestModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
 using CleaningBackTesting.Models.RequestModels;
 using System.Net.Http.Headers;
@@ -22,8 +17,8 @@ namespace CleaningBackTesting.Client
             string json = JsonSerializer.Serialize<AuthRequestModel>(adminAuthRequestModel);
 
             HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST + "/auth", jsonContent : json);
-            HttpStatusCode actualCode = responseMessage.StatusCode;
 
+            HttpStatusCode actualCode = responseMessage.StatusCode;
             Assert.AreEqual(expectedCode, actualCode);
 
             string token = responseMessage.Content.ReadAsStringAsync().Result;

@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace CleaningBackTesting.Client
 {
-    public class CleanerClient
+    public class CleanerClient       //auth nujen???
     {
         private const string HOST = "https://piter-education.ru:10042";
         private const string CLEANERSHOST = HOST + "/Cleaners";
@@ -15,7 +15,6 @@ namespace CleaningBackTesting.Client
         public List<GetCleanerResponseModel> GetCleaners(string token)
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
-
             HttpResponseMessage responseMessage = SendRequest(HttpMethod.Get, CLEANERSHOST, token);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;

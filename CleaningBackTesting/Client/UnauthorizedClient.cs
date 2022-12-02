@@ -1,12 +1,8 @@
 ﻿using CleaningBackTesting.RequestModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace CleaningBackTesting.Client
 {
@@ -16,13 +12,11 @@ namespace CleaningBackTesting.Client
         public string Auth(AuthRequestModel cleanerAuthRequestModel)
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
-
             string json = JsonSerializer.Serialize<AuthRequestModel>(cleanerAuthRequestModel);
 
             HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST + "/Auth", jsonContent: json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
-
             Assert.AreEqual(expectedCode, actualCode);
 
             string token = responseMessage.Content.ReadAsStringAsync().Result;

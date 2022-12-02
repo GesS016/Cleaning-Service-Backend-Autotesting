@@ -19,15 +19,15 @@ namespace CleaningBackTesting.Client
         private const string CLIENTSHOST = HOST + "/Clients";
         public int ClientRegistration(ClientRegistrationRequestModel clientRegistrationRequestModel)
         {
-            HttpStatusCode expectedCode = HttpStatusCode.Created; //ожидаемый код=201
+            HttpStatusCode expectedCode = HttpStatusCode.Created;
             string json = JsonSerializer.Serialize<ClientRegistrationRequestModel>(clientRegistrationRequestModel);
 
-            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST + "/clients", jsonContent : json);
+            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, CLIENTSHOST, jsonContent : json);
 
-            HttpStatusCode actualCode = responseMessage.StatusCode;//actual код=код,выданный сайтом
-            Assert.AreEqual(expectedCode, actualCode);//сравнение ожидаемого и actual кода
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+            Assert.AreEqual(expectedCode, actualCode);
 
-            int id =Convert.ToInt32( responseMessage.Content.ReadAsStringAsync().Result);//перевеодит айди в int
+            int id =Convert.ToInt32( responseMessage.Content.ReadAsStringAsync().Result);
 
             return id;
         }
@@ -35,7 +35,7 @@ namespace CleaningBackTesting.Client
         public string Auth(AuthRequestModel clientAuthRequestModel)
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
-            string json = JsonSerializer.Serialize<AuthRequestModel>(adminAuthRequestModel);
+            string json = JsonSerializer.Serialize<AuthRequestModel>(clientAuthRequestModel);
 
             HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST + "/auth", jsonContent: json);
 
