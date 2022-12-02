@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleaningBackTesting.Client
 {
-    public class SendRequestForClients
+    public class MethodClients
     {
         public static HttpResponseMessage SendRequest(HttpMethod httpMethod, string uriString, string token = null, string jsonContent = null)
         {
