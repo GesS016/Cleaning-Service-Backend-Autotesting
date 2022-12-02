@@ -17,7 +17,7 @@ namespace CleaningBackTesting.Client
             HttpStatusCode expectedCode = HttpStatusCode.OK;
             string json = JsonSerializer.Serialize<AuthRequestModel>(adminAuthRequestModel);
 
-            HttpResponseMessage responseMessage = SendRequestForClients.SendRequest(HttpMethod.Post, HOST + "/auth", jsonContent : json);
+            HttpResponseMessage responseMessage = MethodClients.SendRequest(HttpMethod.Post, HOST + "/auth", jsonContent : json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
             Assert.AreEqual(expectedCode, actualCode);
@@ -32,7 +32,7 @@ namespace CleaningBackTesting.Client
             HttpStatusCode expectedCode = HttpStatusCode.Created;
             string json = JsonSerializer.Serialize<CleanerRegistrationRequestModel>(cleanerRegistrationRequestModel);
 
-            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST+"/cleaners", token, json);
+            HttpResponseMessage responseMessage = MethodClients.SendRequest(HttpMethod.Post, HOST+"/cleaners", token, json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
 
@@ -47,7 +47,7 @@ namespace CleaningBackTesting.Client
             HttpStatusCode expectedCode = HttpStatusCode.Created;
             string json = JsonSerializer.Serialize<BundlesRequestModel>(bundlesRequestModel);
 
-            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST+"/Bundles", token, json);
+            HttpResponseMessage responseMessage = MethodClients.SendRequest(HttpMethod.Post, HOST+"/Bundles", token, json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
             Assert.AreEqual(expectedCode, actualCode);
@@ -62,7 +62,7 @@ namespace CleaningBackTesting.Client
             HttpStatusCode expectedCode = HttpStatusCode.Created;
             string json = JsonSerializer.Serialize<ServiceRequestModel>(serviceRequestModel);
 
-            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Post, HOST + "/Services", token, json);
+            HttpResponseMessage responseMessage = MethodClients.SendRequest(HttpMethod.Post, HOST + "/Services", token, json);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
             Assert.AreEqual(expectedCode, actualCode);
@@ -76,7 +76,7 @@ namespace CleaningBackTesting.Client
         {
             HttpStatusCode expectedCode = HttpStatusCode.OK;
 
-            HttpResponseMessage responseMessage = SendRequest(HttpMethod.Get, HOST + $"/cleaners/{id}", token);
+            HttpResponseMessage responseMessage = MethodClients.SendRequest(HttpMethod.Get, HOST + $"/cleaners/{id}", token);
 
             HttpStatusCode actualCode = responseMessage.StatusCode;
 
