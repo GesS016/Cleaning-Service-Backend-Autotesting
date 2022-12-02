@@ -20,21 +20,21 @@ namespace CleaningBackTesting.CleanerTests
         public void CreateCleanerTest()
         {
             Client.CleanerClient cleaner = new();
-            _id=cleaner.CleanerRegistration(new CleanerRegistrationRequestModel()
-            //CleanerRegistrationRequestModel cleanerRegistrationRequestModel = new CleanerRegistrationRequestModel()
+            CleanerRegistrationRequestModel cleanerRegistration= new CleanerRegistrationRequestModel()
             {
                 FirstName = "Luke",
                 LastName = "Skywalker",
-                BirthDate = "1971-03-14T10:47:35.733Z",  
+                BirthDate = "1971-03-14T10:47:35.733Z",
                 Password = PASSWORD,
                 ConfirmPassword = PASSWORD,
                 Email = EMAIL,
                 Phone = "string",
                 Passport = "stringstri",
                 Schedule = 1,
-                ServicesIds = new List<int>() {},
-                Districts = new List<int>() {}
-            });
+                ServicesIds = new List<int>() { },
+                Districts = new List<int>() { }
+            };
+            _id=cleaner.CleanerRegistration(cleanerRegistration);
 
 
             //Client.CleanerClient cleanerclient = new Client.CleanerClient();
@@ -55,7 +55,19 @@ namespace CleaningBackTesting.CleanerTests
 
             List<CleanerListResponseModel> cleaners = cleaner.GetCleaners(token);
 
-            CollectionAssert.Contains(cleaners, cleaner);
+            CleanerListResponseModel expected = new CleanerListResponseModel()
+            {
+                Id = _id,
+                FirstName = cleanerRegistration.FirstName,
+                LastName = "Skywalker",
+                BirthDate = "1971-03-14T10:47:35.733Z",
+                Email = EMAIL,
+                Phone = "string",
+                DateOfStartWork=DateTime.Now.ToString(),
+                Rating=0
+            };
+
+            CollectionAssert.Contains(cleaners, expected);
         }
 
         [TearDown]
