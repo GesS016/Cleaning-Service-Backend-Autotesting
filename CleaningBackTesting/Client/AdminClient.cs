@@ -1,11 +1,8 @@
 ﻿using CleaningBackTesting.RequestModels;
 using System.Net;
-using System.Text;
 using System.Text.Json;
 using CleaningBackTesting.Models.RequestModels;
-using System.Net.Http.Headers;
 using CleaningBackTesting.Models.ResponseModels;
-using CleaningBackTesting.Client;
 
 namespace CleaningBackTesting.Client
 {

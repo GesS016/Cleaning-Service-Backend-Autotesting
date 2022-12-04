@@ -1,13 +1,10 @@
 ﻿using CleaningBackTesting.Models.ResponseModels;
-using CleaningBackTesting.RequestModels;
 using System.Net;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Text.Json;
 
 namespace CleaningBackTesting.Client
 {
-    public class CleanerClient       //auth nujen???
+    public class CleanerClient  
     {
         private const string HOST = "https://piter-education.ru:10042";
         private const string CLEANERSHOST = HOST + "/Cleaners";
