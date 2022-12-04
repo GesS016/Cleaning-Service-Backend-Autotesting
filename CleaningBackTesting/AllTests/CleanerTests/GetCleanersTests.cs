@@ -37,7 +37,7 @@ namespace CleaningBackTesting.AllTests.CleanerTests
                 Districts = new List<int>() { }
             }, token);
 
-            List<CleanerResponseModel> cleaners = cleaner.GetCleaners(token);
+            List<GetCleanerResponseModel> cleaners = cleaner.GetCleaners(token);
 
             Assert.NotNull(cleaners);
         }
