@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.Json;
 using CleaningBackTesting.Models.RequestModels;
 using CleaningBackTesting.Models.ResponseModels;
+using System.Net.Http.Headers;
 
 namespace CleaningBackTesting.Client
 {
@@ -83,6 +84,32 @@ namespace CleaningBackTesting.Client
             GetCleanerResponseModel cleaner = JsonSerializer.Deserialize<GetCleanerResponseModel>(responseJson)!;
 
             return cleaner;
+        }
+        public List<CleanerResponseModel> GetCleaners(string token)
+        {
+            HttpStatusCode expectedCode = HttpStatusCode.OK;
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            HttpRequestMessage message = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new System.Uri($"https://piter-education.ru:10042/Cleaners"),
+            };
+
+            HttpResponseMessage responseMessage = client.Send(message);
+
+            HttpStatusCode actualCode = responseMessage.StatusCode;
+            Assert.AreEqual(expectedCode, actualCode);
+
+            string responseJson = responseMessage.Content.ReadAsStringAsync().Result;
+            List<CleanerResponseModel> cleaners = JsonSerializer.Deserialize<List<CleanerResponseModel>>(responseJson)!;
+
+            return cleaners;
         }
     }
 }
