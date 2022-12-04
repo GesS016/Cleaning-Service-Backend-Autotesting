@@ -1,32 +1,31 @@
-﻿using CleaningBackTesting.Client;
-using CleaningBackTesting.Models.ResponseModels;
-using CleaningBackTesting.RequestModels;
-using Dapper;
-using System.Data;
+﻿using CleaningBackTesting.RequestModels;
 using System.Data.SqlClient;
+using System.Data;
+using Dapper;
+using CleaningBackTesting.Models.ResponseModels;
 
-namespace CleaningBackTesting.CleanerTests
+namespace CleaningBackTesting.AllTests.CleanerTests
 {
-    public class CleanerTests
+    public class GetCleanersTests
     {
-        private const string EMAIL = "luke11123sky@example.com";
+        private const string EMAIL = "alximik@gmail.com";
         private const string PASSWORD = "stringst";
-        private int id;
+        private int _id;
         [Test]
-        public void CreateCleanerTest()
+        public void CleanersGetTest()
         {
-            AdminClient adminClient = new();
+            Client.AdminClient adminClient = new();
             string token = adminClient.Auth(new AuthRequestModel()
             {
                 Password = "qwerty12345",
                 Email = "Admin@gmail.com"
             });
 
-
-            id = adminClient.CleanerRegistration(new CleanerRegistrationRequestModel()
+            Client.AdminClient cleaner = new();
+            _id = cleaner.CleanerRegistration(new CleanerRegistrationRequestModel()
             {
-                FirstName = "Luke",
-                LastName = "Skywalker",
+                FirstName = "Ivan",
+                LastName = "Alximik",
                 BirthDate = "1971-03-14T10:47:35.733Z",
                 Password = PASSWORD,
                 ConfirmPassword = PASSWORD,
@@ -38,9 +37,9 @@ namespace CleaningBackTesting.CleanerTests
                 Districts = new List<int>() { }
             }, token);
 
-            GetCleanerResponseModel cleaner = adminClient.GetCleanerById(token, id);
+            List<GetCleanerResponseModel> cleaners = cleaner.GetCleaners(token);
 
-            Assert.IsNotNull(cleaner);
+            Assert.NotNull(cleaners);
         }
 
         [TearDown]

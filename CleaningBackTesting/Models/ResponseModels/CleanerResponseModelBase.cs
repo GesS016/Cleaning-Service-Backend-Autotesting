@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace CleaningBackTesting.Models.ResponseModels
 {
-    public class CleanerListResponseModel
+    public class CleanerResponseModelBase
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
@@ -19,7 +14,7 @@ namespace CleaningBackTesting.Models.ResponseModels
         public string LastName { get; set; }
 
         [JsonPropertyName("dateOfStartWork")]
-        public DateTime DateOfStartWork { get; set; }
+        public string DateOfStartWork { get; set; }
 
         [JsonPropertyName("email")]
         public string Email { get; set; }
@@ -28,10 +23,9 @@ namespace CleaningBackTesting.Models.ResponseModels
         public string Phone { get; set; }
 
         [JsonPropertyName("birthDate")]
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; }
 
         [JsonPropertyName("rating")]
-        public int Rating { get; set; }
-        //services nujno dobavit????????????????????????????
+        public double Rating { get; set; }
     }
 }
