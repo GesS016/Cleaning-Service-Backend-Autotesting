@@ -2,7 +2,6 @@
 using System.Data.SqlClient;
 using System.Data;
 using Dapper;
-using CleaningBackTesting;
 using CleaningBackTesting.Models.ResponseModels;
 
 namespace CleaningBackTesting.AllTests.CleanerTests
@@ -23,7 +22,7 @@ namespace CleaningBackTesting.AllTests.CleanerTests
             });
 
             Client.AdminClient cleaner = new();
-            cleaner.CleanerRegistration(new CleanerRegistrationRequestModel()
+            _id = cleaner.CleanerRegistration(new CleanerRegistrationRequestModel()
             {
                 FirstName = "Ivan",
                 LastName = "Alximik",
@@ -37,23 +36,10 @@ namespace CleaningBackTesting.AllTests.CleanerTests
                 ServicesIds = new List<int>() { },
                 Districts = new List<int>() { }
             }, token);
-            _id = cleaner.CleanerRegistration(cleanerRegistration);
 
-            List<CleanerResponseModel> cleaners = cleaner.GetCleanerById(token);
+            List<CleanerResponseModel> cleaners = cleaner.GetCleaners(token);
 
-            CleanerResponseModel expected = new CleanerResponseModel()
-            {
-                Id = _id,
-                FirstName = cleanerRegistration.FirstName,
-                LastName = "Skywalker",
-                BirthDate = "1971-03-14T10:47:35.733Z",
-                Email = EMAIL,
-                Phone = "string",
-                DateOfStartWork = DateTime.Now.ToString(),
-                Rating = 0
-            };
-
-            CollectionAssert.Contains(cleaners, expected);
+            Assert.NotNull(cleaners);
         }
 
         [TearDown]

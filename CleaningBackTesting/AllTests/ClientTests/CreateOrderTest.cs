@@ -1,10 +1,6 @@
-﻿using CleaningBackTesting.Client;
-using CleaningBackTesting.RequestModels;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using CleaningBackTesting.RequestModels;
 using System.Data.SqlClient;
 using System.Data;
-using System.Text;
 using CleaningBackTesting.Models.RequestModels;
 using Dapper;
 
