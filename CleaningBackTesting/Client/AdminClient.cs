@@ -84,7 +84,5 @@ namespace CleaningBackTesting.Client
 
             return cleaner;
         }
-
-        
     }
 }
